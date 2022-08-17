@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Sun">
+      <UniqueIdentifier>{84286dbf-2cef-4672-a6ed-083d86a011e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrame">
+      <UniqueIdentifier>{b4dae451-55d3-426b-ba01-5983fea82fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="YiShotApp">
+      <UniqueIdentifier>{b55ca93d-fc72-467d-95f9-6fd77f309a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arrow">
+      <UniqueIdentifier>{f85451fc-844e-4111-967c-b6890b2e47e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{4776ffa5-8d5e-4368-afaf-37540d645a1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="People">
+      <UniqueIdentifier>{8c86cc0b-c500-4ca5-a3cb-6e61ca3044ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameConfig">
+      <UniqueIdentifier>{07856cbd-f3b1-4f26-9c6f-cf8818808f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Target">
+      <UniqueIdentifier>{b676fa6c-9ba4-413e-ae06-d9ffb9ec6391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shield">
+      <UniqueIdentifier>{20d718f6-e31e-49a3-bc90-6f096c81d11d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="People\CPeople.cpp">
+      <Filter>People</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun\CSun.cpp">
+      <Filter>Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun\CSunBox.cpp">
+      <Filter>Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="YiShotApp\CYiShotApp.cpp">
+      <Filter>YiShotApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow\CArrow.cpp">
+      <Filter>Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow\CArrowBox.cpp">
+      <Filter>Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround\CBackGround.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFrame\GameFrame.cpp">
+      <Filter>GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Target\CTarget.cpp">
+      <Filter>Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield\CShield.cpp">
+      <Filter>Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield\CShieldBox.cpp">
+      <Filter>Shield</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="People\CPeople.h">
+      <Filter>People</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun\CSun.h">
+      <Filter>Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun\CSunBox.h">
+      <Filter>Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="YiShotApp\CYiShotApp.h">
+      <Filter>YiShotApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow\CArrow.h">
+      <Filter>Arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow\CArrowBox.h">
+      <Filter>Arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround\CBackGround.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFrame\GameFrame.h">
+      <Filter>GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfig\CGameConfig.h">
+      <Filter>GameConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="Target\CTarget.h">
+      <Filter>Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield\CShield.h">
+      <Filter>Shield</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield\CShieldBox.h">
+      <Filter>Shield</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

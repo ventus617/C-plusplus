@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CGameFrame">
+      <UniqueIdentifier>{ed366c0e-b463-40b5-aab6-99c43083a7d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameConfig">
+      <UniqueIdentifier>{b3896443-e1f4-4de5-a388-754b263577b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="whiteone">
+      <UniqueIdentifier>{d3a05e55-17d6-4d17-9daa-48bc42234031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fiveinarow">
+      <UniqueIdentifier>{95e77ba6-bc04-44d9-9778-d80daf682983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="chessboard">
+      <UniqueIdentifier>{813b0510-3d7d-44be-afba-ed3df0febbcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blackone">
+      <UniqueIdentifier>{eccea7c4-65d4-499b-a4ca-3f685bbb6cb1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameFrame\GameFrame.cpp">
+      <Filter>CGameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Fiveinarow\CFiveinarowApp.cpp">
+      <Filter>Fiveinarow</Filter>
+    </ClCompile>
+    <ClCompile Include="chessboard\CChessBoard.cpp">
+      <Filter>chessboard</Filter>
+    </ClCompile>
+    <ClCompile Include="blackone\CBlackBox.cpp">
+      <Filter>blackone</Filter>
+    </ClCompile>
+    <ClCompile Include="blackone\CBlackOne.cpp">
+      <Filter>blackone</Filter>
+    </ClCompile>
+    <ClCompile Include="whiteone\CWhiteBox.cpp">
+      <Filter>whiteone</Filter>
+    </ClCompile>
+    <ClCompile Include="whiteone\CWhiteOne.cpp">
+      <Filter>whiteone</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameFrame\GameFrame.h">
+      <Filter>CGameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Fiveinarow\CFiveinarow.h">
+      <Filter>Fiveinarow</Filter>
+    </ClInclude>
+    <ClInclude Include="chessboard\CChessBoard.h">
+      <Filter>chessboard</Filter>
+    </ClInclude>
+    <ClInclude Include="blackone\CBlackBox.h">
+      <Filter>blackone</Filter>
+    </ClInclude>
+    <ClInclude Include="blackone\CBlackOne.h">
+      <Filter>blackone</Filter>
+    </ClInclude>
+    <ClInclude Include="whiteone\CWhiteBox.h">
+      <Filter>whiteone</Filter>
+    </ClInclude>
+    <ClInclude Include="whiteone\CWhiteOne.h">
+      <Filter>whiteone</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfig\GameConfig.h">
+      <Filter>GameConfig</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

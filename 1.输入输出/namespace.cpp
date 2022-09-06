@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int a = 10;
+//int a = 10;
 //:: 作用域运算符  一般来说，前面放作用域，后面放成员，如果前面省略，则是默认使用全局的作用域
 
 //namespace：C++的关键字 定义命名空间 作用：区分同一作用域下相同的成员
@@ -20,9 +20,10 @@ namespace AA
 	int a = 30;
 	void fun()
 	{
-		cout << "BB:fun()" << endl;
+		std::cout << "BB:fun()" << std::endl;
 	}
 };
+
 //using namespace AA; //则使用的变量是变成AA命名空间的变量
 
 
@@ -31,10 +32,10 @@ namespace BB
 	int a = 40;
 	void fun()
 	{
-		cout << "AA:fun()" << endl;
+		std::cout << "AA:fun()" << std::endl;
 	}
 };
-using namespace BB;
+//sing namespace BB;
 
 int main ()
 {
@@ -46,15 +47,15 @@ int main ()
 	//cout << AA::a << endl;
 	//cout << BB::a << endl;
 	////---------------------------------
-	//::fun();
+	//::fun();//AA:fun()
 	//BB::fun();//它俩相同
 
 
 	//AA::fun();//使用AA空间内的fun()函数
-	using BB::a; //明确声明了使用哪个命名空间中的成员，当未指明作用域时（using namespace xx），默认使用该成员
-	cout << a << endl;
+	using BB::a; //明确声明了使用哪个命名空间中的成员，
+	std::cout << a << std::endl;//当未指明作用域时（using namespace xx）或(::XX)，默认使用在函数内using XX: XX 的该成员XX
 
-	//不可对同一个命名多次使用using，会产生矛盾
+	//不可同时多次使用using 打开不同的命名空间，会产生矛盾
 	//using AA::a; //error C2874:using 声明导致多次声明"<未知>
 	return 0;
 }

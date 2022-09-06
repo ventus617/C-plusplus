@@ -79,5 +79,13 @@ int main()
 	//string 可以用char赋值 但是string赋值char必需通过str.c_str()转换
 	//str.c_str(); 将string转换成const char*,通过返回值返回
 	fun(str.c_str());
+
+
+	/*string pp1 = "1232";
+	char pp[5] = "1234";
+	pp1 = pp[5];
+	pp[5] = (char)pp1.c_str();*/ //强转成char类型 或者用char*类型来接
+
+
 	return 0;
 }

@@ -12,7 +12,7 @@ int main01()
 	free(p1);//释放空间
 	p1 = NULL;
 	//calloc动态申请空间，堆区，初始化默认为0
-	int* q1 = (int*)calloc(1, sizeof(int));
+	int* q1 = (int*)calloc(1, sizeof(int));//存储单元的个数 存储单元的大小
 	cout << *q1 << endl;
 	free(q1);
 	q1 = NULL;

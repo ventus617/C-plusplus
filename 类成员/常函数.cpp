@@ -44,7 +44,7 @@ public:
 	}
 
 	//一般函数：仅this的指向不可修改 但是this指向的空间值可以修改
-	void fun2(/* const C7 * const this */) 
+	void fun2(/*  C7 * const this */) 
 	{
 
 		/*	可修改*/

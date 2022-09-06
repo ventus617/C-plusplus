@@ -29,6 +29,7 @@ void fun4(int a, int b=20);
 //相互调用时，声明和定义得分开，这样对方才能认识
 void f1();
 void f2();
+
 void f1()
 {
 	f2();

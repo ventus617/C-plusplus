@@ -38,7 +38,7 @@ int main04()
 	fun11(NULL);// void fun11(int a)
 	fun11(nullptr);//void fun11(int *p)
 
-	//fun12(nullptr); 二义性
+	//fun12(nullptr); 二义性 即空指针是代表所有类型的空指针 不是指定的类型的空指针
 
 	//利用强转来匹配对应重载函数
 	fun12((char*)nullptr);

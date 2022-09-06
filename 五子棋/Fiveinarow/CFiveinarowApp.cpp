@@ -7,6 +7,7 @@
 CREATE_OBJECT(CFiveinarowApp)
 WND_PARAM(600, 200, (535 + 16), (535 + 39), L"五子棋");
 
+
 CFiveinarowApp::CFiveinarowApp()
 {
 	::MessageBox(m_hwnd, L"开始,黑棋先下子", L"提示", MB_OK);
@@ -68,9 +69,9 @@ void CFiveinarowApp::ON_WM_TIMER(WPARAM wo, LPARAM lo)
 	case TIMER_CHECK_ID:
 	{
 		int total = 0;
-		for (int i = 0;i < 14; i++)
+		for (int i = 0;i < CHESS_BOARD_PIECES_NUMBER; i++)
 		{
-			for (int j = 0; j < 14; j++)
+			for (int j = 0; j < CHESS_BOARD_PIECES_NUMBER; j++)
 			{
 				if (tag_win[i][j] == 0)break;
 				else if (tag_win[i][j] != 0)total++;
@@ -90,8 +91,8 @@ void CFiveinarowApp::ON_WM_LBUTTONDOWN(POINT po)
 		
 		mciSendString(_T("play 落子.mp3"), NULL, 0, NULL);
 		if (flag == 1&& tag_block
-			[(po.x - 25) / CHESS_BOARD_SPACING]
-		[(po.y - 25) / CHESS_BOARD_SPACING]
+			[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING]
+		[(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING]
 		== 0)
 		{
 			
@@ -100,16 +101,16 @@ void CFiveinarowApp::ON_WM_LBUTTONDOWN(POINT po)
 			m_BlackBox.m_listBlack.push_back(pBone);
 			flag = 0;//交换位 1为黑子行 0为白子行
 			m_remaintime = 60;
-			tag_block[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] = 1;//放置棋子之后 该位置标记为非空
-			tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] = 1;//黑子是1
+			tag_block[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] = 1;//放置棋子之后 该位置标记为非空
+			tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] = 1;//黑子是1
 			if (Winner(po))
 			{
 				Gameover_black();
 			}
 		}
 		else if (flag == 0&& tag_block
-			[(po.x - 25) / CHESS_BOARD_SPACING]
-		[(po.y - 25) / CHESS_BOARD_SPACING]
+			[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING]
+		[(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING]
 		== 0)
 		{
 			
@@ -118,8 +119,8 @@ void CFiveinarowApp::ON_WM_LBUTTONDOWN(POINT po)
 			m_WhiteBox.m_listWhite.push_back(pOne);
 			flag = 1;
 			m_remaintime = 60;
-			tag_block[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] = 1;
-			tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] = 2;//白子是2
+			tag_block[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] = 1;
+			tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] = 2;//白子是2
 			if (Winner(po))
 			{
 				Gameover_white();
@@ -170,14 +171,14 @@ bool CFiveinarowApp::Winner(POINT po)
 	int black_win = 1;
 	int white_win = 1;
 	//先判断是黑子还是白子
-	if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] == 1)
+	if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] == 1)
 	{
 		//--------------------------------------------------------------------------------------------------------
 			//判断左右是不是一共有五个
 			for (int i = -4; i <= 4; i++)
 			{
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING ][(po.y - 25) / CHESS_BOARD_SPACING +i] != 2
-					&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING ][(po.y - 25) / CHESS_BOARD_SPACING +i] != 0
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING +i] != 2
+					&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING +i] != 0
 					)
 				{
 					total_black += 1;
@@ -189,15 +190,15 @@ bool CFiveinarowApp::Winner(POINT po)
 				for (int j = -4; j <= 3; j++)
 				{
 					//从左往右开始,若当前数和下一个相同
-					if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j]==1&&
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j] ==
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j + 1])
+					if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j]==1&&
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] ==
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1])
 					{
 						black_win += 1;
 						if (black_win == 5)return true;
 					}
-					else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+					else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 						&& black_win < 5)
 					{
 						black_win = 1;
@@ -211,8 +212,8 @@ bool CFiveinarowApp::Winner(POINT po)
 			//判断上下是不是共有五个
 			for (int i = -4; i <= 4; i++)
 			{
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING+i][(po.y - 25) / CHESS_BOARD_SPACING ] != 2
-					&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING+i][(po.y - 25) / CHESS_BOARD_SPACING ] != 0
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING+i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ] != 2
+					&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING+i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ] != 0
 					)
 				{
 					total_black += 1;
@@ -224,15 +225,15 @@ bool CFiveinarowApp::Winner(POINT po)
 				for (int j = -4; j <= 3; j++)
 				{
 					//从上往下开始,若当前数和下一个相同
-					if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING+j][(po.y - 25) / CHESS_BOARD_SPACING] == 1 &&
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING+j][(po.y - 25) / CHESS_BOARD_SPACING] ==
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING+j+1][(po.y - 25) / CHESS_BOARD_SPACING])
+					if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING+j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] == 1 &&
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING+j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] ==
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING+j+1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING])
 					{
 						black_win += 1;
 						if (black_win == 5)return true;
 					}
-					else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING ] !=
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING ]
+					else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ] !=
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING ]
 						&& black_win < 5)
 					{
 						black_win = 1;
@@ -247,8 +248,8 @@ bool CFiveinarowApp::Winner(POINT po)
 			//判断左斜是不是共有五个
 			for (int i = -4; i <= 4; i++)
 			{
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 2
-					&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 0
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 2
+					&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 0
 					)
 				{
 					total_black += 1;
@@ -260,15 +261,15 @@ bool CFiveinarowApp::Winner(POINT po)
 				for (int j = -4; j <= 3; j++)
 				{
 					//从左上往右下开始,若当前数和下一个相同
-					if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING + j] == 1 &&
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING + j] ==
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1])
+					if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] == 1 &&
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] ==
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1])
 					{
 						black_win += 1;
 						if (black_win == 5)return true;
 					}
-					else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+					else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 						&& black_win < 5)
 					{
 						black_win = 1;
@@ -283,8 +284,8 @@ bool CFiveinarowApp::Winner(POINT po)
 			//判断右斜是不是共有五个
 			for (int i = -4; i <= 4; i++)
 			{
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 2
-					&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING - i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 0
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 2
+					&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 0
 					)
 				{
 					total_black += 1;
@@ -296,15 +297,15 @@ bool CFiveinarowApp::Winner(POINT po)
 				for (int j = -4; j <= 3; j++)
 				{
 					//从左上往右下开始,若当前数和下一个相同
-					if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] == 1 &&
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] ==
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j - 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1])
+					if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] == 1 &&
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] ==
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j - 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1])
 					{
 						black_win += 1;
 						if (black_win == 5)return true;
 					}
-					else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-						tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j - 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+					else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+						tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j - 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 						&& black_win < 5)
 					{
 						black_win = 1;
@@ -319,14 +320,14 @@ bool CFiveinarowApp::Winner(POINT po)
 
 	//--------------------------------------------------------------------------------------------------------
 	//判断是不是白子
-	else if ((tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING] == 2))
+	else if ((tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] == 2))
 	{
 		//--------------------------------------------------------------------------------------------------------
 			//判断左右是不是一共有五个
 		for (int i = -4; i <= 4; i++)
 		{
-			if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + i] != 1
-				&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + i] != 0
+			if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 1
+				&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 0
 				)
 			{
 				total_white += 1;
@@ -338,15 +339,15 @@ bool CFiveinarowApp::Winner(POINT po)
 			for (int j = -4; j <= 3; j++)
 			{
 				//从左往右开始,若当前数和下一个相同
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j] == 2 &&
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j] ==
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j + 1])
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] == 2 &&
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] ==
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1])
 				{
 					white_win += 1;
 					if (white_win == 5)return true;
 				}
-				else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+				else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 					&& white_win < 5)
 				{
 					white_win = 1;
@@ -360,8 +361,8 @@ bool CFiveinarowApp::Winner(POINT po)
 		//判断上下是不是共有五个
 		for (int i = -4; i <= 4; i++)
 		{
-			if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING] != 1
-				&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING] != 0
+			if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] != 1
+				&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] != 0
 				)
 			{
 				total_white += 1;
@@ -373,15 +374,15 @@ bool CFiveinarowApp::Winner(POINT po)
 			for (int j = -4; j <= 3; j++)
 			{
 				//从上往下开始,若当前数和下一个相同
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING] == 2 &&
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING] ==
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING])
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] == 2 &&
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] ==
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING])
 				{
 					white_win += 1;
 					if (white_win == 5)return true;
 				}
-				else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING] !=
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING]
+				else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING] !=
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING]
 					&& white_win < 5)
 				{
 					white_win = 1;
@@ -396,8 +397,8 @@ bool CFiveinarowApp::Winner(POINT po)
 		//判断左斜是不是共有五个
 		for (int i = -4; i <= 4; i++)
 		{
-			if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 1
-				&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING + i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 0
+			if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 1
+				&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 0
 				)
 			{
 				total_white += 1;
@@ -409,15 +410,15 @@ bool CFiveinarowApp::Winner(POINT po)
 			for (int j = -4; j <= 3; j++)
 			{
 				//从左上往右下开始,若当前数和下一个相同
-				if (tag_win[((po.x - 25) / CHESS_BOARD_SPACING) + j][((po.y - 25) / CHESS_BOARD_SPACING )+ j] == 2 &&
-					tag_win[((po.x - 25) / CHESS_BOARD_SPACING)+ j][((po.y - 25) / CHESS_BOARD_SPACING )+ j] ==
-					tag_win[((po.x - 25) / CHESS_BOARD_SPACING) + j + 1][((po.y - 25) / CHESS_BOARD_SPACING) + j + 1])
+				if (tag_win[((po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING) + j][((po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING )+ j] == 2 &&
+					tag_win[((po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING)+ j][((po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING )+ j] ==
+					tag_win[((po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING) + j + 1][((po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING) + j + 1])
 				{
 					white_win += 1;
 					if (white_win == 5)return true;
 				}
-				else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING + j + 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+				else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 					&& white_win < 5)
 				{
 					white_win = 1;
@@ -432,8 +433,8 @@ bool CFiveinarowApp::Winner(POINT po)
 		//判断右斜是不是共有五个
 		for (int i = -4; i <= 4; i++)
 		{
-			if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 1
-				&& tag_win[(po.x - 25) / CHESS_BOARD_SPACING - i][(po.y - 25) / CHESS_BOARD_SPACING + i] != 0
+			if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 1
+				&& tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - i][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + i] != 0
 				)
 			{
 				total_white += 1;
@@ -445,15 +446,15 @@ bool CFiveinarowApp::Winner(POINT po)
 			for (int j = -4; j <= 3; j++)
 			{
 				//从左上往右下开始,若当前数和下一个相同
-				if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] == 2 &&
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] ==
-					tag_win[((po.x - 25) / CHESS_BOARD_SPACING) - j - 1][((po.y - 25) / CHESS_BOARD_SPACING) + j + 1])
+				if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] == 2 &&
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] ==
+					tag_win[((po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING) - j - 1][((po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING) + j + 1])
 				{
 					white_win += 1;
 					if (white_win == 5)return true;
 				}
-				else if (tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j][(po.y - 25) / CHESS_BOARD_SPACING + j] !=
-					tag_win[(po.x - 25) / CHESS_BOARD_SPACING - j - 1][(po.y - 25) / CHESS_BOARD_SPACING + j + 1]
+				else if (tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j] !=
+					tag_win[(po.x - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING - j - 1][(po.y - CHESS_BOARD_OUTSIDE) / CHESS_BOARD_SPACING + j + 1]
 					&& white_win < 5)
 				{
 					white_win = 1;

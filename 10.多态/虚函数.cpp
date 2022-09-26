@@ -24,7 +24,7 @@ using namespace std;
 //int main()
 //{
 //	Cfather* pfa = new Cson;//父类指针指向子类对象
-//	pfa->fun();//子类对象调用父类函数
+//	pfa->fun();//父类指针调用父类函数
 //
 //	return 0;
 //}

@@ -1,4 +1,4 @@
-
+//
 //#include<iostream>
 //#include<stdlib.h>
 //
@@ -12,16 +12,16 @@
 //
 //
 ////КЏЪ§жиди
-//bool rule(int  a, int b)
-//{
-//	return a > b;
-//}
-//
-//
-//bool rule(double a, double b)
-//{
-//	return a > b;
-//}
+////bool rule(int  a, int b)
+////{
+////	return a > b;
+////}
+////
+////
+////bool rule(double a, double b)
+////{
+////	return a > b;
+////}
 //
 //
 //template<typename T>
@@ -56,7 +56,7 @@
 //	int arr[20];
 //	for (int i = 0; i < 20; i++)
 //	{
-//		arr[i] = rand() % 20+1;
+//		arr[i] = rand() % 20+9;
 //	}
 //	//BubbleSort(arr, 20);
 //	BubbleSort(arr, 20, &rule);

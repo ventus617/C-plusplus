@@ -1,4 +1,4 @@
-
+//
 //#include<iostream>
 //#include<list>
 //using namespace std;
@@ -73,9 +73,9 @@
 //
 //	lst.sort(&rule);//自动排序,降序  a>b的顺序（用户指定的比较操作）
 //
-//	template <class Traits>
+//	/*template <class Traits>
 //	void sort(Traits comp); comp是用于排列连续元素的比较运算符 
-//	成员模板函数 根据类Traits的 用户指定的比较操作 comp 对元素进行排序。
+//	成员模板函数 根据类Traits的 用户指定的比较操作 comp 对元素进行排序。*/
 //
 //
 //	for (int v : lst)
